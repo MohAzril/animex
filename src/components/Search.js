@@ -12,7 +12,7 @@ class Search extends Component {
                 type="text"
                 name="search"
                 id="search"
-                value={this.props.keyword} 
+                // value={this.props.keyword} 
                 placeholder={this.props.placeholder} 
                 onChange = {this.props.doSearch}
                 />

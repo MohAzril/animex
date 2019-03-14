@@ -1,6 +1,7 @@
 import createStore from 'unistore';
 import axios from 'axios';
 import { async } from 'q';
+import { stat } from 'fs';
 // import {Provider, connect} from 'unistore/preact';
 
 const initialState ={
@@ -13,7 +14,8 @@ const initialState ={
     password:"",
     listNews:[],
     listTopNews:[],
-    search:""
+    search:"",
+    genre:"comedy"
 }
 
 const apiKey = "72aadd1aff8c490ea5c90d2e5225a042";
@@ -34,11 +36,18 @@ export const actions = store => ({
 
     cariBerita: async state =>{
         await axios
-        .get(urlNews).then(function(response){
-        store.setState({listNews:response.data.articles });
+        .get("https://cdn.animenewsnetwork.com/encyclopedia/api.xml?manga=~naruto").then(function(response){
+        var parseString = require('xml2js').parseString;
+        var xml = response.data;
+        parseString(xml,
+            function(err,result){
+            console.log(result);
+            console.log("ini hasil xml2json",result.ann.manga[2].info[0].$.src);
+            store.setState({listNews:result.ann.manga});
+        });
         // handle response
         console.log(response.data);
-        console.log(this.state.listNews);
+        // console.log(this.state.listNews);
         })
         .catch(function(error){
         // handle error
@@ -58,20 +67,29 @@ export const actions = store => ({
     },
 
     searchNews: async (state,keyword) => {
+        const data={listNews:state.listNews};
         console.log("search Movie by", keyword);
         if(keyword.length>2){
             try{
                 const response = await axios.get(
-                    "https://cdn.animenewsnetwork.com/encyclopedia/api.xml?manga=~naruto"
+                    // "https://cdn.animenewsnetwork.com/encyclopedia/reports.xml?id=155&name=naruto&nlist=50"
+                    // "https://cdn.animenewsnetwork.com/encyclopedia/api.xml?anime=~naruto&manga=~naruto"
+                    "https://cdn.animenewsnetwork.com/encyclopedia/api.xml?manga=~"+keyword                    
                 );
                 console.log("Iki datane",response.data);
                 var parseString = require('xml2js').parseString;
                 var xml = response.data;
-                parseString(xml,function(err,result){console.log("ini hasil xml2json",result);});
+                parseString(xml,
+                    function(err,result){
+                    console.log(result);
+                    if(result.ann.manga){store.setState({listNews:result.ann.manga});}
+                    // console.log("ini hasil xml2json",result.ann.manga[2].info[1]);
+                });
+                // store.setState({listNews:result.ann.manga});data
                 // var mov = response.data.movies;
                 // const result = mov.filter(mov => mov.Category == keyword);
                 // console.log("hasil",result);
-                store.setState({listNews:response});
+                // store.setState({listNews:response});
             }
             catch (error){
                 console.error(error);
@@ -82,19 +100,19 @@ export const actions = store => ({
     signIn: async state => {
         // const data = {username:state.username,password:state.password};
         await axios
-        // .post("https://mocktofu1.free.beeceptor.com/login")
-        .post("https://mocktofu2.free.beeceptor.com/auth")
+        // .post("https://mocktofu4.free.beeceptor.com/auth")
+        .post("https://api-todofancy.herokuapp.com/api/auth")
         .then(response => {
             console.log("respon login",response.data);
-            if (response.data.hasOwnProperty("status")) {
+            // if (response.data.hasOwnProperty("status")) {
                 store.setState({
                     is_login: true,
-                    api_key: response.data.status,
+                    // api_key: response.data.status,
                     full_name:response.data.user_data.username,
                     email:response.data.user_data.email,
                     avatar:response.data.user_data.avatar
                 });
-            }
+            // }
         })
         .catch(error => {
             console.log(error);

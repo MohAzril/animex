@@ -35,9 +35,16 @@ handleInputChange = e => {
     this.props.searchNews(e.target.value);
 };
 
+handleOnClick = e => {
+    console.log("event genre", e.target.value);
+    // let value = e.target.value;
+    this.props.setField(e);
+};
+
 render() {
     console.log("here render")
     // const news = this.state.ListNews;
+    if (this.props.listNews.length != 0){console.log("listNewsblog", this.props.listNews[0].info[0].$.src)};
     console.log("is_login", this.props.is_login);
     if(!this.props.is_login){
         return <Redirect to={{ pathname: "/signin"}}/>;
@@ -62,11 +69,42 @@ render() {
                     <a href="#">Start Bootstrap</a>
                 </div>    
             </div>    
-            {this.props.listNews.map((item,key) =>{
-                const src_img = item.Poster === null ? az : item.Poster;
-                const content = item.Poster !== null ? item.Synopsis : "";
-                return <ListNews key={key} title={item.Title} category={item.Category} img={src_img} content={content}/>;
+            {
+                this.props.listNews.map((item,key) =>{
+                var text="";
+                var rating="";
+                var latednews="";
+                var genre=[];
+                for (var i = 0; i < item.info.length; i++) {
+                    console.log("tipe info",item.info[i].$.type);
+                    if(item.info[i].$.type=="Plot Summary"){
+                    text += item.info[i]._+" ";}
+                    if(item.info[i].$.type=="Genres"){
+                    // console.log("genre sort",item.info[i]._);
+                    // if(item.info[i]._!=this.props.genre){
+                    // console.log("genre pilihan filter",this.props.genre);
+                    // return}
+                    genre.push(item.info[i]._);}
+                };
+                if(item.ratings !== undefined){
+                for (var i = 0; i < item.ratings.length; i++) {
+                console.log("rating",item.ratings[i].$.weighted_score);
+                if(item.ratings[i].$.weighted_score !== null){
+                rating += item.ratings[i].$.weighted_score;}
+                }}
+                if(item.news !== undefined){
+                console.log("news",item.news[item.news.length-1]);
+                latednews=item.news[item.news.length-1]._;
+                console.log("news",latednews);
+                } 
+                const src_img = item.info[0].$.src === null ? az : item.info[0].$.src;
+                console.log("Isi komik",text);
+                console.log(genre);
+                if(genre.includes("erotica")){return}
+                if(genre.includes(this.props.genre)){
+                return <ListNews new={latednews} genres={genre} index={key} title={item.$.name} rate={rating} img={src_img} content={text}/>;}
             })}
+            {/* }} */}
         </div>
 
         
@@ -84,12 +122,19 @@ render() {
                     Artikel Favorit
                 </li>
                 {this.props.listTopNews.map((item,key) =>{
-                const src_img = item.urlToImage === null ? az : item.urlToImage;
-                const content = item.urlToImage !== null ? item.content : "";
+                const src_img = item.name === null ? az : item.name;
+                const content = item.name !== null ? item.name : "";
+                console.log("sidelist");
                 return <SideList index={key} title={item.title} img={src_img} content={content}/>;
                 })}
                 </ul>
             </div>
+            <button className="btn btn-primary" name="genre" value="romance" onClick={(e)=>this.handleOnClick(e)}>romance</button>
+            <button className="btn btn-primary" name="genre" value="adventure" onClick={(e)=>this.handleOnClick(e)}>adventure</button>
+            <button className="btn btn-primary" name="genre" value="comedy" onClick={(e)=>this.handleOnClick(e)}>comedy</button>
+            <button className="btn btn-primary" name="genre" value="drama" onClick={(e)=>this.handleOnClick(e)}>drama</button>
+            <button className="btn btn-primary" name="genre" value="fantasy" onClick={(e)=>this.handleOnClick(e)}>fantasy</button>
+
             {/* <SideList/> */}
         </div>
         
@@ -101,5 +146,5 @@ render() {
   }}
 }
 
-export default connect("is_login,email,full_name,listNews,listTopNews", actions)
+export default connect("is_login,email,full_name,listNews,listTopNews,genre", actions)
 (withRouter(Blog));

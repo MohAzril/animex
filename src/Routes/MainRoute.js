@@ -14,10 +14,11 @@ import Isi from '../pages/page1';
 const MainRoute = () => {
     return (
         <Switch>
-            <Route exact path="/" component={Category}></Route>
+            {/* <Route exact path="/" component={Category}></Route> */}
             <Route exact path="/signin" component={SignIn}></Route>
             <Route exact path="/profile" component={Isi}></Route>
-            <Route exact path="/news" component={Blog}></Route>
+            <Route exact path="/" component={Blog}></Route>
+            {/* <Route exact path="/news" component={Blog}></Route> */}
             <Route exact path="/action" component={Romance}></Route>
             <Route exact path="/romance" component={Romance}></Route>            
             <Route exact path="/fiction" component={Romance}></Route>            
