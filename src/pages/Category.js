@@ -100,4 +100,3 @@ render() {
 
 export default connect("is_login,email,full_name,listNews,listTopNews", actions)
 (withRouter(Category));
-// export default withRouter(Category) ;

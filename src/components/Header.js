@@ -71,6 +71,9 @@ const Header = props => {
                                     SignOut
                                     </Link>
                                 </li>
+                                <li className="menu">
+                                    <Link to="/news">News</Link>
+                                </li>
                             </ul>
                         </nav>
                     </div>

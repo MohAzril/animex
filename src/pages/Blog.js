@@ -24,12 +24,13 @@ class Blog extends Component {
 
 componentDidMount = () =>{
     this.props.cariBerita().then(() => {
-        console.log("this",this);
+    console.log("this",this);
+        
     });
 }; 
 
 handleInputChange = e => {
-    console.log("event", e.target.value);
+    // console.log("event", e.target.value);
     // let value = e.target.value;
     this.props.setField(e);
     this.props.searchNews(e.target.value);
@@ -60,12 +61,21 @@ render() {
                 <div class="card-footer text-muted">
                     Posted on January 1, 2017 by
                     <a href="#">Start Bootstrap</a>
-                </div>    
+                </div>
             </div>    
-            {this.props.listNews.map((item,key) =>{
-                const src_img = item.Poster === null ? az : item.Poster;
-                const content = item.Poster !== null ? item.Synopsis : "";
-                return <ListNews key={key} title={item.Title} category={item.Category} img={src_img} content={content}/>;
+            {   this.props.listNews.map((item,key) =>{
+                const contents = item.info.map((value,keey) =>{
+                const content = value.$.type == "Plot Summary" ? value._ : null;
+                return content;
+                });
+                var text="";
+                for (var i = 0; i < contents.length; i++) {
+                    if(contents[i]!=null){
+                    text += contents[i];}
+                  } 
+                const src_img = item.info[0].$.src === null ? az : item.info[0].$.src;
+                console.log("Isi komik",text);
+                return <ListNews index={key} title={item.$.name} category={item.Category} img={src_img} content={text}/>;
             })}
         </div>
 
@@ -83,11 +93,11 @@ render() {
                 <li class="list-group-item d-flex justify-content-between align-items-center fav">
                     Artikel Favorit
                 </li>
-                {this.props.listTopNews.map((item,key) =>{
+                {/* {this.props.listTopNews.map((item,key) =>{
                 const src_img = item.urlToImage === null ? az : item.urlToImage;
                 const content = item.urlToImage !== null ? item.content : "";
                 return <SideList index={key} title={item.title} img={src_img} content={content}/>;
-                })}
+                })} */}
                 </ul>
             </div>
             {/* <SideList/> */}

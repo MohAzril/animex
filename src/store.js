@@ -16,11 +16,6 @@ const initialState ={
     search:""
 }
 
-const apiKey = "72aadd1aff8c490ea5c90d2e5225a042";
-const baseUrl = "https://newsapi.org/v2/"
-const urlHeadline = baseUrl + "top-headlines?" + "country=id&" + "pageSize=3&"+ "apiKey=" + apiKey;
-const urlNews = baseUrl + "everything?" +"q=meme&" + "pageSize=3&"+ "apiKey=" + apiKey;
-
 export const store = createStore(initialState)
 
 // If actions  is a function, it gets passed store:
@@ -28,33 +23,33 @@ export const store = createStore(initialState)
 export const actions = store => ({
     // Action can just return a state update:
     setField: (state, event) => {
-        console.log({ [event.target.name]: event.target.value });
+        // console.log({ [event.target.name]: event.target.value });
         return { [event.target.name]: event.target.value };
     },
 
     cariBerita: async state =>{
         await axios
-        .get(urlNews).then(function(response){
-        store.setState({listNews:response.data.articles });
+        .get("https://www.mangaeden.com/api/list/0/").then(function(response){
+        store.setState({listNews:response.manga});
         // handle response
-        console.log(response.data);
-        console.log(this.state.listNews);
+        // console.log(response.data);
+        // console.log(this.state.listNews);
         })
         .catch(function(error){
         // handle error
         console.log(error);
         });
-        await axios
-        .get(urlHeadline).then(function(response){
-        store.setState({listTopNews:response.data.articles });
-        // handle response
-        console.log(response.data);
-        console.log(this.state.listTopNews);
-        })
-        .catch(function(error){
-        // handle error
-        console.log(error);
-        });
+        // await axios
+        // .get("https://www.mangaeden.com/api/list/0/").then(function(response){
+        // store.setState({listTopNews:response.manga});
+        // // handle response
+        // // console.log(response.data);
+        // // console.log(this.state.listTopNews);
+        // })
+        // .catch(function(error){
+        // // handle error
+        // console.log(error);
+        // });
     },
 
     searchNews: async (state,keyword) => {
@@ -62,12 +57,12 @@ export const actions = store => ({
         if(keyword.length>2){
             try{
                 const response = await axios.get(
-                    "https://cdn.animenewsnetwork.com/encyclopedia/api.xml?manga=~naruto"
+                    "https://www.mangaeden.com/api/list/0/"
                 );
-                console.log("Iki datane",response.data);
-                var parseString = require('xml2js').parseString;
-                var xml = response.data;
-                parseString(xml,function(err,result){console.log("ini hasil xml2json",result);});
+                // console.log("Iki datane",response.data);
+                // var parseString = require('xml2js').parseString;
+                // var xml = response.data;
+                // parseString(xml,function(err,result){console.log("ini hasil xml2json",result);});
                 // var mov = response.data.movies;
                 // const result = mov.filter(mov => mov.Category == keyword);
                 // console.log("hasil",result);
@@ -83,18 +78,18 @@ export const actions = store => ({
         // const data = {username:state.username,password:state.password};
         await axios
         // .post("https://mocktofu1.free.beeceptor.com/login")
-        .post("https://mocktofu2.free.beeceptor.com/auth")
+        .post("https://api-todofancy.herokuapp.com/api/auth")
         .then(response => {
             console.log("respon login",response.data);
-            if (response.data.hasOwnProperty("status")) {
+            // if (response.data.hasOwnProperty("status")) {
                 store.setState({
                     is_login: true,
-                    api_key: response.data.status,
+                    // api_key: response.data.status,
                     full_name:response.data.user_data.username,
                     email:response.data.user_data.email,
                     avatar:response.data.user_data.avatar
                 });
-            }
+            // }
         })
         .catch(error => {
             console.log(error);
