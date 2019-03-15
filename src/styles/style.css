@@ -3,17 +3,17 @@ body{
     /* background-image: url("/home/alphatech/kumpulan/CSS/project-css-layouting/img/sample-pattern.png"); */
     background-color: white;
 }
-header{
+/* header{
     background-color: white;
     width: 100%;
     box-shadow: 0px 2px grey;   
-}
+} */
 
-header .box {
+/* header .box {
     width: 100%;
     height: 95px;
     background-color: white;
-}
+} */
 
 header img{
     position: absolute;
@@ -54,13 +54,13 @@ a.active{
 }
 
 #banner .box{
-  /* background-image: url("../images/img/exp-gallery/heart-shaker-banner.jpg"); */
-  /* background-image: url("../images/img/background-sunrise.jpg"); */
+     /* background-image: url("../images/img/exp-gallery/heart-shaker-banner.jpg");
+  background-image: url("../images/img/background-sunrise.jpg"); */
   background-size: cover;
   background-position: top center;
   height: 500px;
   width: 100%;
-  margin-bottom: 200px;
+  margin-bottom: 20px;
   }
 
 #banner .profil{
@@ -150,11 +150,11 @@ p.job{
     padding-bottom:40px;
 }
 
-#info .box{
+/* #info .box{
     background-color: white;
     height: 100%;
     width: 100%;    
-}
+} */
 
 #about{
     color: #19345E;
@@ -196,11 +196,12 @@ tr:nth-child(odd) {
     background-color: white;
 }
 
-footer{
+/* footer{
     background-color: #19345E;
     width: 100%;
-    /* height: 250px; */
+    /* height: 250px;
 }
+ */
 
 footer .box{
     background-color: #19345E;
@@ -252,4 +253,48 @@ footer ul{
 
 footer .nav-link img{
     margin-right: 30px;
+} */
+
+.logo-animex{
+    width:20%;
+    margin:2%;
+}
+
+.button-blog{
+    width: 300px;
+}
+
+.gambar-top{
+    width:"200px";
+    margin-left:"30%";
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+.rekomend{
+    font-size: 24px;
+    margin-bottom: 0;
+}
+
+.rekomd-button{
+    margin: 0 2px 15px 2px;
+}
+
+@media only screen and (max-width:600px){
+    .logo-animex{
+        width: 60%;
+        margin: 5%;
+    }
+    .button-blog{
+        width: 80%;
+    }
+    .card.md4{
+        width: 100%
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+
 }

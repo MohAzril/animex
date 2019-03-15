@@ -1,38 +1,129 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-import '../styles/style.css';
+// import '../styles/style.css';
 
 class Footer extends Component {
   render() {
     return (
-      <div className="Footer">
-        <footer>
-            <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="box">
-                        <a class="logo" href="#"><img id="logo" src={require("../images/logo/logo-alterra-academy-plain@2x.png")} width="125px"/></a>
-                        <h5 class="copyright">&copy; Copyright Alterra Group 2019</h5>    
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="box">
-                        <br/>
-                        <ul>
-                            <li><h2 id="contact" class="nav-follow" href="#">Follow us On</h2></li>
-                            <li><a class="nav-link" href="#"><span><img src={require('../images/ico/ico-facebook.png')}/></span> Facebook</a></li>
-                            <li><a class="nav-link" href="#"><span><img src={require("../images/ico/ico-twitter.png")}/></span> Twitter</a></li>
-                            <li><a class="nav-link" href="#"><span><img src={require("../images/ico/ico-instagram.png")}/></span> Instagram</a></li>
-                        </ul>     
-                    </div>
-                </div>
-            </div>
-            </div>
-        </footer>
-        <script src="../styles/bootstrap.min.js"></script>
-      </div>
-    );
-  }
-}
+      <footer class="page-footer font-small stylish-color-dark pt-4">
+        <div class="container text-center text-md-left">
+          <div class="row">
+              <div class="col-md-4 mx-auto">
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
+                <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
+                  adipisicing elit.</p>
+              </div>
+                <hr class="clearfix w-100 d-md-none"/>
 
+              <div class="col-md-2 mx-auto">
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="#!">Link 1</a>
+                  </li>
+                  <li>
+                    <a href="#!">Link 2</a>
+                  </li>
+                  <li>
+                    <a href="#!">Link 3</a>
+                  </li>
+                  <li>
+                    <a href="#!">Link 4</a>
+                  </li>
+                </ul>
+              </div>
+                <hr class="clearfix w-100 d-md-none"/>
+
+              <div class="col-md-2 mx-auto">
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="#!">Link 1</a>
+                  </li>
+                  <li>
+                    <a href="#!">Link 2</a>
+                  </li>
+                  <li>
+                    <a href="#!">Link 3</a>
+                  </li>
+                  <li>
+                    <a href="#!">Link 4</a>
+                  </li>
+                </ul>
+              </div>
+      
+              <hr class="clearfix w-100 d-md-none"/>
+
+              <div class="col-md-2 mx-auto">
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="#!">Link 1</a>
+                  </li>
+                  <li>
+                    <a href="#!">Link 2</a>
+                  </li>
+                  <li>
+                    <a href="#!">Link 3</a>
+                  </li>
+                  <li>
+                    <a href="#!">Link 4</a>
+                  </li>
+                </ul>
+              </div>
+      
+            </div>
+            
+          </div>
+      
+          <hr/>
+      
+          {/* <ul class="list-unstyled list-inline text-center py-2">
+            <li class="list-inline-item">
+              <h5 class="mb-1">Register for free</h5>
+            </li>
+            <li class="list-inline-item">
+              <a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>
+            </li>
+          </ul> */}
+      
+          <hr/>
+      
+          <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+              <a class="btn-floating btn-fb mx-1">
+                <i class="fab fa-facebook-f"> </i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-tw mx-1">
+                <i class="fab fa-twitter"> </i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-gplus mx-1">
+                <i class="fab fa-google-plus-g"> </i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-li mx-1">
+                <i class="fab fa-linkedin-in"> </i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-dribbble mx-1">
+                <i class="fab fa-dribbble"> </i>
+              </a>
+            </li>
+          </ul>
+      
+          <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+          </div>
+      
+      </footer>
+      )
+    }
+  }
+  
 export default Footer;
