@@ -25,9 +25,9 @@ render() {
     console.log("here render")
     // const news = this.state.ListNews;
     console.log("is_login", this.props.is_login);
-    if(!this.props.is_login){
-        return <Redirect to={{ pathname: "/signin"}}/>;
-    } else {
+    // if(!this.props.is_login){
+    //     return <Redirect to={{ pathname: "/signin"}}/>;
+    // } else {
     return (
     <div className="Category">
         {/* <Header/> */}
@@ -53,7 +53,7 @@ render() {
     </div>
     );
   }}
-}
+// }
 
 export default connect("is_login,email,full_name,listNews,listTopNews", actions)
 (withRouter(Romance));

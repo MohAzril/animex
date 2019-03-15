@@ -11,9 +11,15 @@ const initialState ={
     avatar:"",
     username:"",
     password:"",
-    listNews:[],
+    listNews:[],    
     listTopNews:[],
-    search:""
+    search:"",
+    surname: '',
+    gender:'',
+    region:"",
+    age: '',
+    weather:'',
+    bg:''
 }
 
 const apiKey = "72aadd1aff8c490ea5c90d2e5225a042";
@@ -30,6 +36,11 @@ export const actions = store => ({
     setField: (state, event) => {
         console.log({ [event.target.name]: event.target.value });
         return { [event.target.name]: event.target.value };
+    },
+
+    setBg: (state, image) => {
+        // console.log({ [event.target.name]: event.target.value });
+        return { bg: image };
     },
 
     cariBerita: async state =>{
@@ -62,12 +73,13 @@ export const actions = store => ({
         if(keyword.length>2){
             try{
                 const response = await axios.get(
-                    "https://cdn.animenewsnetwork.com/encyclopedia/api.xml?manga=~naruto"
-                );
-                console.log("Iki datane",response.data);
+                    // "https://cdn.animenewsnetwork.com/encyclopedia/api.xml?manga=~naruto"
+                    "https://cdn.animenewsnetwork.com/encyclopedia/reports.xml?id=155"
+                    );
+                // console.log("Iki datane",response.data);
                 var parseString = require('xml2js').parseString;
                 var xml = response.data;
-                parseString(xml,function(err,result){console.log("ini hasil xml2json",result);});
+                parseString(xml,function(err,result){console.log("ini HASIL xml2json: ",result.report.item[0].type);});
                 // var mov = response.data.movies;
                 // const result = mov.filter(mov => mov.Category == keyword);
                 // console.log("hasil",result);
@@ -83,16 +95,19 @@ export const actions = store => ({
         // const data = {username:state.username,password:state.password};
         await axios
         // .post("https://mocktofu1.free.beeceptor.com/login")
-        .post("https://mocktofu2.free.beeceptor.com/auth")
+        .post("https://uinames.com/api/?ext")
         .then(response => {
             console.log("respon login",response.data);
-            if (response.data.hasOwnProperty("status")) {
+            if (response.data.hasOwnProperty("name")) {
                 store.setState({
                     is_login: true,
-                    api_key: response.data.status,
-                    full_name:response.data.user_data.username,
-                    email:response.data.user_data.email,
-                    avatar:response.data.user_data.avatar
+                    api_key: response.data.name,
+                    full_name:response.data.name,
+                    surname:response.data.surname,
+                    region:response.data.region,
+                    age:response.data.age,
+                    avatar:response.data.photo,
+                    gender:response.data.gender
                 });
             }
         })
@@ -100,6 +115,35 @@ export const actions = store => ({
             console.log(error);
         })
     },
+
+    getWeather: async state => {
+        // const data = {username:state.username,password:state.password};
+        const urlWeather = "https://api.openweathermap.org/data/2.5/weather?appid=baa0ee6c5c2b1f791f536f2f8dbbd7d5&q="
+        await axios
+        // .post("https://mocktofu1.free.beeceptor.com/login")
+        .post(urlWeather + state.region)
+        .then(response => {
+            console.log("respon weather",response.data.weather[0].id);
+            store.setState({weather:response.data.weather[0].id})
+            
+            // if (response.data.hasOwnProperty("name")) {
+            //     store.setState({
+            //         is_login: true,
+            //         api_key: response.data.name,
+            //         full_name:response.data.name,
+            //         surname:response.data.surname,
+            //         region:response.data.region,
+            //         age:response.data.age,
+            //         avatar:response.data.photo,
+            //         gender:response.data.gender
+            //     });
+            // }
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    },
+
     signOut: state =>{
         return {is_login: false}
     },
