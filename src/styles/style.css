@@ -253,3 +253,16 @@ footer ul{
 footer .nav-link img{
     margin-right: 30px;
 }
+
+.logo-animex{
+    width:20%;
+    margin:2%;
+}
+
+@media only screen and (max-width:600px){
+    .logo-animex{
+        width: 60%;
+        margin: 5%;
+    }
+
+}
