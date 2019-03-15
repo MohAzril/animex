@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 // import logo from './logo.svg';
 // import '../styles/style.css';
-import '../styles/blog.css';
+// import '../styles/blog.css';
 // const style ={
 //   maxWidth: "200px"
 // };
@@ -10,7 +10,6 @@ import '../styles/blog.css';
 const ListNews = props => {
   const content = props.content.slice(0,250)
   // console.log("latednews",props.new)
-
   return (
     // <div className="col-md-4">
       <section className="content text-center">
@@ -19,7 +18,7 @@ const ListNews = props => {
         <div className="right">{props.content}</div> */}
           <h1 class="my-4">{props.title}</h1>
           <div class="card mb-4">
-            <img class="card-img-top" src={props.img} alt="Card image cap" style={{width:"300px", marginLeft:"30%"}}/>
+            <img class="card-img-top" src={props.img} alt="Card image cap" style={{height:"500px"}}/>
             <div class="card-body">
               <h2 class="card-title">Rating: {props.rate}</h2>
               <p class="card-text">{content}...</p>

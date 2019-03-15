@@ -43,7 +43,7 @@ export const actions = store => ({
 
     cariBerita: async state =>{
         await axios
-        .get("https://cdn.animenewsnetwork.com/encyclopedia/api.xml?"+ state.type +"=~one").then(function(response){
+        .get("https://cdn.animenewsnetwork.com/encyclopedia/api.xml?"+ state.type +"=~naruto").then(function(response){
         var parseString = require('xml2js').parseString;
         var xml = response.data;
         parseString(xml,

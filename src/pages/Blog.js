@@ -4,10 +4,9 @@ import {connect} from "unistore/react";
 import {actions} from "../store";
 import {withRouter} from "react-router-dom";
 // import logo from './logo.svg';
-import '../styles/blog.css';
-import Footer from '../components/Footer.js'
+// import '../styles/blog.css';
 import Search from '../components/Search.js'
-import SideList from '../components/SideList.js'
+// import SideList from '../components/SideList.js'
 import ListNews from '../components/ListNews'
 
 //dummy date
@@ -46,11 +45,23 @@ handleOnClick = e => {
 render() {
     console.log("here render")
     // const news = this.state.ListNews;
-    if (this.props.listNews.length != 0){console.log("listNewsblog", this.props.listNews[0].info[0].$.src)};
+    if (this.props.listNews.length != 0){console.log("listNewsblog", this.props.listNews)};
     console.log("is_login", this.props.is_login);
     if(!this.props.is_login){
         return <Redirect to={{ pathname: "/signin"}}/>;
-    } else {
+    } else {        
+        // console.log("rating @", this.props.listNews[0].ratings[0].$.weighted_score);
+    function compare(a,b) { 
+    if(a.ratings !== undefined && b.ratings !== undefined){
+    if (a.ratings[0].$.weighted_score < b.ratings[0].$.weighted_score)
+        return 1;
+    if (a.ratings[0].$.weighted_score > b.ratings[0].$.weighted_score)
+        return -1;
+    return 0;
+    }
+    }
+    this.props.listNews.sort(compare);
+    console.log("hasil sort",this.props.listNews);
     return (
     <div className="Blog">
         {/* <Header/> */}
@@ -115,10 +126,6 @@ render() {
                     if(item.info[i].$.type=="Plot Summary"){
                     text += item.info[i]._+" ";}
                     if(item.info[i].$.type=="Genres"){
-                    // console.log("genre sort",item.info[i]._);
-                    // if(item.info[i]._!=this.props.genre){
-                    // console.log("genre pilihan filter",this.props.genre);
-                    // return}
                     genre.push(item.info[i]._);}
                 };
                 console.log("genre all", genre)
@@ -142,7 +149,7 @@ render() {
                 return <ListNews new={latednews} genres={genre} index={key} title={item.$.name} rate={rating} img={src_img} content={text}/>;}
                 }
             }
-                )}
+            )}
 {/* 
 
                 {   
@@ -188,7 +195,6 @@ render() {
         
         </div>
         </div>
-        <Footer/>
     </div>
     );
   }}
