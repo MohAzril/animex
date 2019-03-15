@@ -22,7 +22,8 @@ const initialState ={
     weather:'',
     bg:'',
     genre:"comedy",
-    type:"anime"
+    type:"anime",
+    rekom:{rekom1:'', rekom2:''}
 }
 
 export const store = createStore(initialState)
@@ -41,9 +42,14 @@ export const actions = store => ({
         return { bg: image };
     },
 
+    setRekom: (state, rekom) => {
+        // console.log({ [event.target.name]: event.target.value });
+        return {rekom: rekom};
+    },
+
     cariBerita: async state =>{
         await axios
-        .get("https://cdn.animenewsnetwork.com/encyclopedia/api.xml?"+ state.type +"=~one").then(function(response){
+        .get("https://cdn.animenewsnetwork.com/encyclopedia/api.xml?"+ state.type +"=~doraemon").then(function(response){
         var parseString = require('xml2js').parseString;
         var xml = response.data;
         parseString(xml,

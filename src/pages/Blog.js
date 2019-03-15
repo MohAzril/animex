@@ -4,8 +4,8 @@ import {connect} from "unistore/react";
 import {actions} from "../store";
 import {withRouter} from "react-router-dom";
 // import logo from './logo.svg';
-import '../styles/blog.css';
-import Footer from '../components/Footer.js'
+// import '../styles/blog.css';
+// import Footer from '../components/Footer.js'
 import Search from '../components/Search.js'
 import SideList from '../components/SideList.js'
 import ListNews from '../components/ListNews'
@@ -188,7 +188,7 @@ render() {
         
         </div>
         </div>
-        <Footer/>
+        {/* <Footer/> */}
     </div>
     );
   }}
