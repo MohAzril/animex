@@ -62,7 +62,7 @@ render() {
                 <img class="card-img-top" src="https://m.media-amazon.com/images/M/MV5BOWJhMjJjMDItODQxYS00ODIyLWJhYzAtNTliMDhkZjM0YTA1XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg" alt="Card image cap"/>
                 <div class="card-body">
                 <h5 class="card-title">Romance</h5>
-                <button className="btn btn-primary" name="search" value="romance" onClick={(e)=>this.handleOnClick(e)}>romance</button>
+                <button className="btn btn-primary" name="search" value="romance" onClick={(e)=>this.handleOnClick(e)}>naruto</button>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
             </div>
@@ -70,7 +70,7 @@ render() {
                 <img class="card-img-top" src="https://m.media-amazon.com/images/M/MV5BZmEzNjhiZWEtNTM5OS00ZmQyLThhYjEtNjY4ZDZhOGFkMzI4XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg" alt="Card image cap"/>
                 <div class="card-body">
                 <h5 class="card-title">Action</h5>
-                <button className="btn btn-primary" name="search" value="action" onClick={(e)=>this.handleOnClick(e)}>action</button>
+                <button className="btn btn-primary" name="search" value="action" onClick={(e)=>this.handleOnClick(e)}>one_piece</button>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
             </div>
@@ -100,4 +100,3 @@ render() {
 
 export default connect("is_login,email,full_name,listNews,listTopNews", actions)
 (withRouter(Category));
-// export default withRouter(Category) ;

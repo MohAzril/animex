@@ -1,6 +1,7 @@
 import createStore from 'unistore';
 import axios from 'axios';
 import { async } from 'q';
+import { stat } from 'fs';
 // import {Provider, connect} from 'unistore/preact';
 
 const initialState ={
@@ -19,13 +20,10 @@ const initialState ={
     region:"",
     age: '',
     weather:'',
-    bg:''
+    bg:'',
+    genre:"comedy",
+    type:"anime"
 }
-
-const apiKey = "72aadd1aff8c490ea5c90d2e5225a042";
-const baseUrl = "https://newsapi.org/v2/"
-const urlHeadline = baseUrl + "top-headlines?" + "country=id&" + "pageSize=3&"+ "apiKey=" + apiKey;
-const urlNews = baseUrl + "everything?" +"q=meme&" + "pageSize=3&"+ "apiKey=" + apiKey;
 
 export const store = createStore(initialState)
 
@@ -34,7 +32,7 @@ export const store = createStore(initialState)
 export const actions = store => ({
     // Action can just return a state update:
     setField: (state, event) => {
-        console.log({ [event.target.name]: event.target.value });
+        // console.log({ [event.target.name]: event.target.value });
         return { [event.target.name]: event.target.value };
     },
 
@@ -45,45 +43,97 @@ export const actions = store => ({
 
     cariBerita: async state =>{
         await axios
-        .get(urlNews).then(function(response){
-        store.setState({listNews:response.data.articles });
+        .get("https://cdn.animenewsnetwork.com/encyclopedia/api.xml?"+ state.type +"=~one").then(function(response){
+        var parseString = require('xml2js').parseString;
+        var xml = response.data;
+        parseString(xml,
+            function(err,result){
+            console.log("result seetelah parsing",result);
+            // console.log("ini hasil xml2json",result.ann.manga[2].info[0].$.src);
+            if (result.ann.manga !== undefined){
+                store.setState({listNews:result.ann.manga});}
+            if (result.ann.anime !== undefined){
+                store.setState({listNews:result.ann.anime});}    
+        });
         // handle response
-        console.log(response.data);
-        console.log(this.state.listNews);
+        // console.log(response.data);
+        // console.log(this.state.listNews);
         })
         .catch(function(error){
         // handle error
         console.log(error);
         });
-        await axios
-        .get(urlHeadline).then(function(response){
-        store.setState({listTopNews:response.data.articles });
+
+        // await axios
+        // .get("https://cdn.animenewsnetwork.com/encyclopedia/api.xml?anime=~megaman").then(function(response){
+        // var parseString = require('xml2js').parseString;
+        // var xml = response.data;
+        // parseString(xml,
+        //     function(err,result){
+        //     console.log("result seetelah parsing",result);
+        //     // console.log("ini hasil xml2json",result.ann.manga[2].info[0].$.src);
+        //     if (result.ann.manga !== undefined){
+        //         store.setState({listTopNews:result.ann.manga});}
+        //     if (result.ann.anime !== undefined){
+        //         store.setState({listTopNews:result.ann.anime});}    
+        // });
         // handle response
-        console.log(response.data);
-        console.log(this.state.listTopNews);
-        })
-        .catch(function(error){
-        // handle error
-        console.log(error);
-        });
+        // console.log(response.data);
+        // console.log(this.state.listNews);
+        // })
+        // .catch(function(error){
+        // // handle error
+        // console.log(error);
+        // });
+        // await axios
+        // .get(urlHeadline).then(function(response){
+        // store.setState({listTopNews:response.data.articles });
+        // // handle response
+        // console.log(response.data);
+        // console.log(this.state.listTopNews);
+        // })
+        // .catch(function(error){
+        // // handle error
+        // console.log(error);
+        // });
+        // await axios
+        // .get("https://www.mangaeden.com/api/list/0/").then(function(response){
+        // store.setState({listTopNews:response.manga});
+        // // handle response
+        // // console.log(response.data);
+        // // console.log(this.state.listTopNews);
+        // })
+        // .catch(function(error){
+        // // handle error
+        // console.log(error);
+        // });
     },
 
     searchNews: async (state,keyword) => {
+        // const data={listNews:state.listNews};
         console.log("search Movie by", keyword);
         if(keyword.length>2){
             try{
                 const response = await axios.get(
-                    // "https://cdn.animenewsnetwork.com/encyclopedia/api.xml?manga=~naruto"
-                    "https://cdn.animenewsnetwork.com/encyclopedia/reports.xml?id=155"
-                    );
-                // console.log("Iki datane",response.data);
+                    // "https://cdn.animenewsnetwork.com/encyclopedia/reports.xml?id=155&name=naruto&nlist=50"
+                    // "https://cdn.animenewsnetwork.com/encyclopedia/api.xml?anime=~naruto&manga=~naruto"
+                    "https://cdn.animenewsnetwork.com/encyclopedia/api.xml?"+ state.type +"=~"+keyword                    
+                );
+                console.log("Iki datane",response.data);
                 var parseString = require('xml2js').parseString;
                 var xml = response.data;
-                parseString(xml,function(err,result){console.log("ini HASIL xml2json: ",result.report.item[0].type);});
+                parseString(xml,
+                    function(err,result){
+                    console.log(result);
+                    if(result.ann.manga !== undefined){store.setState({listNews:result.ann.manga});};
+                    if(result.ann.anime !== undefined){store.setState({listNews:result.ann.anime});}
+                    // console.log("ini hasil xml2json",result.ann.manga[2].info[1]);
+                });
+                // store.setState({listNews:result.ann.manga});data
                 // var mov = response.data.movies;
                 // const result = mov.filter(mov => mov.Category == keyword);
                 // console.log("hasil",result);
-                store.setState({listNews:response});
+                // store.setState({listNews:response});
             }
             catch (error){
                 console.error(error);
@@ -94,7 +144,7 @@ export const actions = store => ({
     signIn: async state => {
         // const data = {username:state.username,password:state.password};
         await axios
-        // .post("https://mocktofu1.free.beeceptor.com/login")
+//         .post("https://api-todofancy.herokuapp.com/api/auth")
         .post("https://uinames.com/api/?ext")
         .then(response => {
             console.log("respon login",response.data);
