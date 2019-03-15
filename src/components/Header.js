@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 
 import '../styles/style.css';
+// import { url } from 'inspector';
 
 // class Header extends Component {
 //   render() {
@@ -50,7 +51,7 @@ const Header = props => {
             <div class="row">
                 <div class="col-md-6 col-sm-12 left">
                     <div class="box">
-                        <a href="#"><img id="logo" src={require("../images/logo/logo-alterra-academy.png")} width="125px"/></a>   
+                        <a href="#"><img id="logo" src={require("../images/img/heroLogo.png")} width="125px"/></a>   
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12 right">

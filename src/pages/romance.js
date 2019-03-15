@@ -25,6 +25,7 @@ render() {
     console.log("here render")
     // const news = this.state.ListNews;
     console.log("is_login", this.props.is_login);
+    console.log("isi listNews lho",this.props.listNews);
     if(!this.props.is_login){
         return <Redirect to={{ pathname: "/signin"}}/>;
     } else {

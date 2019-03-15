@@ -24,5 +24,4 @@ class AppRouter extends Component{
     }
 }
 
-export default connect("is_login,email,full_name,listNews,listTopNews", actions)
-(withRouter(AppRouter));
+export default connect("is_login,email,full_name,listNews,listTopNews", actions)(withRouter(AppRouter));

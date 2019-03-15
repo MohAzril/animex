@@ -41,5 +41,4 @@ class Isi extends Component {
   }}
 }
 
-export default connect("is_login,email,full_name,avatar", actions)
-(withRouter(Isi));
+export default connect("is_login,email,full_name,avatar", actions)(withRouter(Isi));
