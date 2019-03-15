@@ -33,7 +33,8 @@ handleInputChange = e => {
     // console.log("event", e.target.value);
     // let value = e.target.value;
     this.props.setField(e);
-    this.props.searchNews(e.target.value);
+    this.props.sortRating(this.props.searchNews(e.target.value));
+    // this.props.sortRating(e);
 };
 
 handleOnClick = e => {
@@ -41,6 +42,8 @@ handleOnClick = e => {
     // let value = e.target.value;
     this.props.setField(e);
     this.props.searchNews(e.target.value);
+    console.log("ini e",e);
+    this.props.sortRating(e);
 };
 
 render() {
@@ -139,8 +142,9 @@ render() {
                 console.log(genre);
                 // if(genre.includes("erotica")){return}
                 if(genre.includes('erotica') === false){
+                if(genre.includes(this.props.genre)){
                 return <ListNews new={latednews} genres={genre} index={key} title={item.$.name} rate={rating} img={src_img} content={text}/>;}
-                }
+                }}
             }
                 )}
 {/* 

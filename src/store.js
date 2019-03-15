@@ -129,6 +129,7 @@ export const actions = store => ({
                     if(result.ann.anime !== undefined){store.setState({listNews:result.ann.anime});}
                     // console.log("ini hasil xml2json",result.ann.manga[2].info[1]);
                 });
+                return state.listNews
                 // store.setState({listNews:result.ann.manga});data
                 // var mov = response.data.movies;
                 // const result = mov.filter(mov => mov.Category == keyword);
@@ -139,6 +140,23 @@ export const actions = store => ({
                 console.error(error);
             }
         }
+    },
+
+    sortRating: (state) => {
+        var stabil = state
+        var temp = [];
+        var hasil = [];
+        for (var i = 0; i < stabil.length-1; i++) {
+            // for (var j = 0; j < stabil[i].ratings.length ; j++) {
+            //     console.log("rating",i.ratings[j].$.weighted_score);
+            if(stabil[i].ratings[0].$.weighted_score !== null && stabil[i].ratings[0].$.weighted_score < stabil[i+1].ratings[0].$.weighted_score){
+                console.log("sorting", stabil[i].ratings[0].$.weighted_score)
+                temp = stabil[i];
+                stabil[i] = stabil[i+1];
+                stabil[i+1] = temp;
+                state.push({listNews:stabil[i]});
+                state.push({listNews:stabil[i+1]})};
+            }
     },
 
     signIn: async state => {
@@ -195,6 +213,6 @@ export const actions = store => ({
     },
 
     signOut: state =>{
-        return {is_login: false}
+        store.setState ({is_login: false})
     },
 });
