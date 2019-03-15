@@ -17,8 +17,8 @@ header .box {
 
 header img{
     position: absolute;
-    bottom: 12.83px;
-    left: 106px;
+    top: 20.83px;
+    /* left: 106px; */
 }
 nav{
     position: absolute;

@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 
 // import '../styles/style.css';
 
+
 const Header = props => {
     return (
         <div>
@@ -89,5 +90,3 @@ export default Header;
 //     </div>
 //     );
 // }
-
-// export default Header;

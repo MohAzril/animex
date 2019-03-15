@@ -7,8 +7,8 @@ import { actions } from '../store';
 class SignIn extends Component {
     postLogin = () => {
         this.props.signIn().then(() => {
-            console.log("this", this);
-            this.props.history.replace("/profile");
+        console.log("this", this);
+        this.props.history.replace("/profile");
         })
     };
     render() {
