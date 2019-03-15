@@ -19,10 +19,11 @@ const MainRoute = () => {
             <Route exact path="/profile" component={Isi}></Route>
             <Route exact path="/" component={Blog}></Route>
             {/* <Route exact path="/news" component={Blog}></Route> */}
-            <Route exact path="/action" component={Romance}></Route>
-            <Route exact path="/romance" component={Romance}></Route>            
-            <Route exact path="/fiction" component={Romance}></Route>            
-            <Route exact path="/comedy" component={Romance}></Route>
+            <Route exact path="/adventure" component={Blog}></Route>
+            <Route exact path="/romance" component={Blog}></Route>            
+            <Route exact path="/drama" component={Blog}></Route>            
+            <Route exact path="/fantasy" component={Blog}></Route>
+            <Route exact path="/comedy" component={Blog}></Route>
         </Switch>
     );
 }
