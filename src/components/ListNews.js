@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 // import logo from './logo.svg';
 // import '../styles/style.css';
-import '../styles/blog.css';
+// import '../styles/blog.css';
 // const style ={
 //   maxWidth: "200px"
 // };
@@ -19,11 +19,11 @@ const ListNews = props => {
         <div className="right">{props.content}</div> */}
           <h1 class="my-4">{props.title}</h1>
           <div class="card mb-4">
-            <img class="card-img-top" src={props.img} alt="Card image cap" style={{width:"300px", marginLeft:"30%"}}/>
+            <img class="card-img-top gambar-top" src={props.img} alt="Card image cap"/>
             <div class="card-body">
               <h2 class="card-title">Rating: {props.rate}</h2>
               <p class="card-text">{content}...</p>
-              <a href="#" class="btn btn-primary">Genre: {props.genres.toString()}&rarr;</a>
+              <a href="#" class="btn btn-primary button-blog">Genre: {props.genres.toString()}&rarr;</a>
             </div>
             <div class="card-footer text-muted">
               Latednews:

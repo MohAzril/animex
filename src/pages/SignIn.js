@@ -14,10 +14,10 @@ class SignIn extends Component {
     render() {
         console.log("state", this.props.email);
         return (
-            <section className="content signin text-center">
+            <section className="content signin text-center" style={{marginBottom:'10%'}}>
                 <form onSubmit={e => e.preventDefault()}>
                     <h1 style={{ marginBottom: "2%", paddingTop: "80px" }}>Sign In</h1>
-                    <img src={require("../images/img/heroLogo.png")} style={{width:"20%", margin:"2%"}}/>
+                    <img src={require("../images/img/heroLogo.png")} className="logo-animex"/>
                     {/* <img src={require("../images/img/background-auntum.jpg")} style={{width:"100%"}}/> */}
                     <div style={{ marginBottom: "2%" }}>
                         <input

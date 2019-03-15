@@ -7,6 +7,7 @@ import {withRouter} from "react-router-dom";
 // import "./styles/App.css";
 //Custom components
 import Header from "./components/Header";
+// import Footer from "./components/Footer";
 
 class AppRouter extends Component{
     postSignout = () =>{
@@ -19,6 +20,7 @@ class AppRouter extends Component{
             <div className="App">
                 <Header postSignout={this.postSignout}/>
                 <MainRoute/>
+                {/* <Footer/> */}
             </div>
         );
     }
