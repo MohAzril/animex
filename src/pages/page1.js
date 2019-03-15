@@ -4,9 +4,9 @@ import {connect} from "unistore/react";
 import {actions} from "../store";
 import {withRouter} from "react-router-dom";
 // import logo from './logo.svg';
+
 // import Footer from '../components/Footer.js'
-import '../styles/style.css';
-import ListNews from '../components/ListNews';
+// import '../styles/style.css';
 
 class Isi extends Component {
   componentDidMount = () => {
@@ -72,8 +72,6 @@ class Isi extends Component {
         {/* </div> */}
         {/* </div> */}
     </div>
-
-    {/* <Footer/> */}
     </div>
     );
   }}

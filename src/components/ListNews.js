@@ -10,7 +10,6 @@ import PropTypes from "prop-types";
 const ListNews = props => {
   const content = props.content.slice(0,250)
   // console.log("latednews",props.new)
-
   return (
     // <div className="col-md-4">
       <section className="content text-center">
